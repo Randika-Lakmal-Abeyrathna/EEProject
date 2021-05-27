@@ -31,7 +31,7 @@ public class GenderController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Gender> findGenderById(@PathVariable Integer id){
+    public ResponseEntity<Gender> findGenderById(@PathVariable("id") Integer id){
         Gender gender = genderService.findGenderById(id);
         return new ResponseEntity<>(gender,HttpStatus.OK);
     }
@@ -42,14 +42,14 @@ public class GenderController {
         return new ResponseEntity<>(newGender,HttpStatus.OK);
     }
 
-    @GetMapping("/find/name/{name]")
-    public ResponseEntity<Gender> findGenderByGender(@PathVariable String gender){
+    @GetMapping("/find/name/{name}")
+    public ResponseEntity<Gender> findGenderByGender(@PathVariable("name") String gender){
         Gender genderList = genderService.findGenderByGender(gender);
         return new ResponseEntity<>(genderList,HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteGenderById(@PathVariable Integer id){
+    public ResponseEntity<?> deleteGenderById(@PathVariable("id") Integer id){
         try{
         genderService.deleteGenderById(id);
         }catch(DataIntegrityViolationException e){

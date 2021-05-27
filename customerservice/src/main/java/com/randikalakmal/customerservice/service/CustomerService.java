@@ -223,13 +223,13 @@ public class CustomerService {
             throw new CustomerException("Password cannot be empty or blank");
         }
 
-        ResponseEntity<User> userResponseEntity = restTemplate.exchange(
-                "http://localhost:8301/api/admin/user/find/" +email,
-                HttpMethod.GET, null, User.class);
+        ResponseEntity<Boolean> userResponseEntity = restTemplate.exchange(
+                "http://localhost:8301/api/admin/user/existence/" +email,
+                HttpMethod.GET, null, Boolean.class);
 
         if (userResponseEntity.getStatusCode() == HttpStatus.OK){
-            User user = userResponseEntity.getBody();
-            if (customerInfoRepository.countByUser(user)>0){
+            Boolean flag = userResponseEntity.getBody();
+            if (flag){
                 throw new CustomerException("Customer "+email+" already in use");
             }
         }
