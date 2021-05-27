@@ -25,13 +25,13 @@ public class SalutationController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Salutation> getSalutationById(@PathVariable Integer id) {
+    public ResponseEntity<Salutation> getSalutationById(@PathVariable("id") Integer id) {
         Salutation salutation = salutationService.findById(id);
         return new ResponseEntity<>(salutation, HttpStatus.OK);
     }
 
     @GetMapping("/find/name/{name}")
-    public ResponseEntity<Salutation> getSalutationBySalutation(@PathVariable String name){
+    public ResponseEntity<Salutation> getSalutationBySalutation(@PathVariable("name") String name){
         Salutation salutationList = salutationService.findSalutationBySalutation(name);
         return new ResponseEntity<>(salutationList,HttpStatus.OK);
     }
@@ -49,7 +49,7 @@ public class SalutationController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteSalutationById(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteSalutationById(@PathVariable("id") Integer id) {
         try {
             salutationService.deleteSalutationById(id);
         } catch (DataIntegrityViolationException e) {

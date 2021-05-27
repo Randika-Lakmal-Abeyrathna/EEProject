@@ -104,7 +104,6 @@ public class UserService {
 
     public void updateUserImage(String email, @NotNull MultipartFile file){
         User user = getUserByEmail(email);
-
         // Upload Image start
 
         String getCurrentDateAndTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // Using because same image name can upload

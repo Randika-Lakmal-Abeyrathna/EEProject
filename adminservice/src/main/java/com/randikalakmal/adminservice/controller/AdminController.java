@@ -32,7 +32,7 @@ public class AdminController {
     }
 
     @PostMapping("/update/image")
-    public ResponseEntity<?> updateImage(@RequestParam("email") String email, MultipartFile image){
+    public ResponseEntity<?> updateImage(@RequestParam("email") String email,MultipartFile image){
         adminInfoService.updateImage(email,image);
         return new ResponseEntity<>(HttpStatus.OK);
     }

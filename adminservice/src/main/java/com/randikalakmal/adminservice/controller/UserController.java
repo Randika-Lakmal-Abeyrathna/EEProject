@@ -3,12 +3,18 @@ package com.randikalakmal.adminservice.controller;
 import com.randikalakmal.adminservice.dto.UserRequest;
 import com.randikalakmal.adminservice.model.User;
 import com.randikalakmal.adminservice.service.UserService;
+import jdk.jfr.ContentType;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.color.ICC_Profile;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @RestController
@@ -42,8 +48,8 @@ public class UserController {
         return new ResponseEntity<>(updatedUser,HttpStatus.OK);
     }
 
-    @PostMapping("/sendActivate")
-    public ResponseEntity<?> sendActivationEmail(@RequestParam("email") String email){
+    @GetMapping("/sendActivate/{email}")
+    public ResponseEntity<?> sendActivationEmail(@PathVariable("email") String email){
         userService.sendUserActivationEmail(email);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -59,6 +65,5 @@ public class UserController {
         userService.updateUserImage(email,image);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 }
