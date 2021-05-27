@@ -42,7 +42,7 @@ public class CustomerService {
 
     public CustomerInfo findCustomerByUserEmail(String email){
         ResponseEntity<User> userResponseEntity = restTemplate.exchange(
-                "http://localhost:8301/api/admin/user/find/" + email,
+                "http://admin-service/api/admin/user/find/" + email,
                 HttpMethod.GET, null, User.class);
 
         if (userResponseEntity.getStatusCode() ==HttpStatus.OK){
@@ -60,7 +60,7 @@ public class CustomerService {
         HttpEntity<CustomerRequest> requestEntity = new HttpEntity<>(customerRequest);
 
         ResponseEntity<User> responseEntity = restTemplate.exchange(
-                "http://localhost:8301/api/admin/user/add",
+                "http://admin-service/api/admin/user/add",
                 HttpMethod.POST,
                 requestEntity,
                 User.class
@@ -71,13 +71,13 @@ public class CustomerService {
             Salutation salutation =null;
 
             ResponseEntity<Gender> genderResponseEntity = restTemplate.exchange(
-                    "http://localhost:8301/api/admin/gender/find/name/" + customerRequest.getGender().toLowerCase(),
+                    "http://admin-service/api/admin/gender/find/name/" + customerRequest.getGender().toLowerCase(),
                     HttpMethod.GET, null, Gender.class);
             if (genderResponseEntity.getStatusCode() == HttpStatus.OK)
                 gender = genderResponseEntity.getBody();
 
             ResponseEntity<Salutation> salutationResponseEntity = restTemplate.exchange(
-                    "http://localhost:8301/api/admin/salutation/find/name/" + customerRequest.getSalutation().toLowerCase(),
+                    "http://admin-service/api/admin/salutation/find/name/" + customerRequest.getSalutation().toLowerCase(),
                     HttpMethod.GET, null, Salutation.class);
 
             if (salutationResponseEntity.getStatusCode() == HttpStatus.OK)
@@ -95,7 +95,7 @@ public class CustomerService {
 
             CustomerInfo savedCustomer = customerInfoRepository.save(customerInfo);
             restTemplate.exchange(
-                    "http://localhost:8301/api/admin/user/sendActivate/"+user.getEmail(),
+                    "http://admin-service/api/admin/user/sendActivate/"+user.getEmail(),
                     HttpMethod.GET,
                      null,
                     Object.class
@@ -112,7 +112,7 @@ public class CustomerService {
         HttpEntity<CustomerRequest> requestEntity = new HttpEntity<>(customerRequest);
 
         ResponseEntity<User> responseEntity = restTemplate.exchange(
-                "http://localhost:8301/api/admin/user/update",
+                "http://admin-service/api/admin/user/update",
                 HttpMethod.PUT,
                 requestEntity,
                 User.class
@@ -128,13 +128,13 @@ public class CustomerService {
             Salutation salutation =null;
 
             ResponseEntity<Gender> genderResponseEntity = restTemplate.exchange(
-                    "http://localhost:8301/api/admin/gender/find/name/" + customerRequest.getGender().toLowerCase(),
+                    "http://admin-service/api/admin/gender/find/name/" + customerRequest.getGender().toLowerCase(),
                     HttpMethod.GET, null, Gender.class);
             if (genderResponseEntity.getStatusCode() == HttpStatus.OK)
                 gender = genderResponseEntity.getBody();
 
             ResponseEntity<Salutation> salutationResponseEntity = restTemplate.exchange(
-                    "http://localhost:8301/api/admin/salutation/find/name/" + customerRequest.getSalutation().toLowerCase(),
+                    "http://admin-service/api/admin/salutation/find/name/" + customerRequest.getSalutation().toLowerCase(),
                     HttpMethod.GET, null, Salutation.class);
 
             if (salutationResponseEntity.getStatusCode() == HttpStatus.OK)
@@ -180,7 +180,7 @@ public class CustomerService {
         requestMap.add("email",email);
 
         ResponseEntity<?> responseEntity = restTemplate.exchange(
-                "http://localhost:8301/api/admin/user/update/image",HttpMethod.POST, new HttpEntity<>(requestMap,headers),
+                "http://admin-service/api/admin/user/update/image",HttpMethod.POST, new HttpEntity<>(requestMap,headers),
                 ResponseEntity.class
         );
 
@@ -224,7 +224,7 @@ public class CustomerService {
         }
 
         ResponseEntity<Boolean> userResponseEntity = restTemplate.exchange(
-                "http://localhost:8301/api/admin/user/existence/" +email,
+                "http://admin-service/api/admin/user/existence/" +email,
                 HttpMethod.GET, null, Boolean.class);
 
         if (userResponseEntity.getStatusCode() == HttpStatus.OK){
