@@ -66,4 +66,10 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/existence/{email}")
+    public ResponseEntity<Boolean> getUserExistence(@PathVariable("email") String email){
+        boolean flag = userService.checkUserExistByEmail(email);
+        return new ResponseEntity<>(flag,HttpStatus.OK);
+    }
+
 }
