@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class ProductDetailController {
         return new ResponseEntity<>(productDetails,HttpStatus.OK);
     }
 
+    public ResponseEntity<ProductDetails> getProductDetailsByProductId(@PathVariable("id") Integer productId){
+        ProductDetails productDetails = productDetailsService.getProductById(productId);
+        return new ResponseEntity<>(productDetails,HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<ProductDetails> addProductDetails(@RequestBody ProductDetailsRequest productDetailsRequest){
         ProductDetails productDetails = productDetailsService.addProductDetail(productDetailsRequest);
@@ -41,5 +47,15 @@ public class ProductDetailController {
             @RequestBody UpdateProductDetailsRequest updateProductDetailsRequest){
         ProductDetails productDetails = productDetailsService.updateProductDetails(updateProductDetailsRequest);
         return new ResponseEntity<>(productDetails,HttpStatus.OK);
+    }
+
+    @PostMapping("/update/image")
+    public ResponseEntity<?> updateProductImage(@RequestParam("id") Integer productId,
+                                                @RequestParam("mainimage")MultipartFile mainimage,
+                                                @RequestParam("extraimage")MultipartFile[] extraimage){
+
+        productDetailsService.updateProductImage(productId,mainimage,extraimage);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
