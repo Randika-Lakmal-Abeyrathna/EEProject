@@ -33,6 +33,11 @@ public class SupplierService {
         return supplierInfoRepository.findAll();
     }
 
+    public SupplierInfo getSupplierById(Integer id){
+        return supplierInfoRepository.findById(id)
+                .orElseThrow(()->new SupplierException("Supplier id "+id+" not found"));
+    }
+
     public SupplierInfo getSupplierByUserEmail(String email){
 
         ResponseEntity<User> userResponseEntity = restTemplate.exchange(

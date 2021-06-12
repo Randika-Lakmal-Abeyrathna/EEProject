@@ -31,6 +31,12 @@ public class SupplierController {
         return new ResponseEntity<>(supplierInfo,HttpStatus.OK);
     }
 
+    @GetMapping("/find/{id}")
+    public ResponseEntity<SupplierInfo> getSupplierById(@PathVariable("id") Integer id){
+        SupplierInfo supplierInfo =supplierService.getSupplierById(id);
+        return new ResponseEntity<>(supplierInfo,HttpStatus.OK);
+    }
+
 
     @PostMapping("/update/image")
     public ResponseEntity<?> updateSupplierImage(@RequestParam("email") String email, MultipartFile image) throws IOException {
