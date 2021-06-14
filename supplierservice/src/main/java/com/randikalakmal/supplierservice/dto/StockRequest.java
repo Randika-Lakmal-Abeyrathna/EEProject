@@ -15,6 +15,7 @@ public class StockRequest {
     private boolean availability;
     private double stockPrice;
     private double marketPrice;
+    private double discount;
     private Date expireDate;
     private int supplierId;
     private int productId;

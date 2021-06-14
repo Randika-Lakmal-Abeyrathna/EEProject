@@ -65,6 +65,7 @@ public class StockService {
         stock.setAvailability(stockRequest.isAvailability());
         stock.setStockPrice(stockRequest.getStockPrice());
         stock.setMarketPrice(stockRequest.getMarketPrice());
+        stock.setDiscount(stockRequest.getDiscount());
         stock.setExpireDate(stockRequest.getExpireDate());
         stock.setSupplierInfo(supplierInfo);
         stock.setProductDetails(productDetails);
@@ -103,6 +104,7 @@ public class StockService {
         stock.setAvailability(stockUpdateRequest.isAvailability());
         stock.setStockPrice(stockUpdateRequest.getStockPrice());
         stock.setMarketPrice(stockUpdateRequest.getMarketPrice());
+        stock.setDiscount(stockUpdateRequest.getDiscount());
         stock.setExpireDate(stockUpdateRequest.getExpireDate());
         stock.setSupplierInfo(supplierInfo);
         stock.setProductDetails(productDetails);

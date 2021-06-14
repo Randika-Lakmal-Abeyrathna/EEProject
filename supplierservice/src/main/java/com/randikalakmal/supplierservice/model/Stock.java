@@ -24,6 +24,7 @@ public class Stock {
     private double stockPrice;
     private double marketPrice;
     private Date expireDate;
+    private double discount;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supplier_info_id",referencedColumnName = "id")
     private SupplierInfo supplierInfo;
