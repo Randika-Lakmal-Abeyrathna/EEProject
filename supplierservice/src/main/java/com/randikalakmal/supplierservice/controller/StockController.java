@@ -8,6 +8,7 @@ import com.randikalakmal.supplierservice.service.StockService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,18 +21,21 @@ public class StockController {
     private final StockService stockService;
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('stock:read')")
     public ResponseEntity<List<Stock>> getAllStock(){
         List<Stock> stockList = stockService.getAllStock();
         return new ResponseEntity<>(stockList, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
+    @PreAuthorize("hasAuthority('stock:read')")
     public ResponseEntity<Stock> getStockById(@PathVariable("id") Integer id){
         Stock stock = stockService.getStockById(id);
         return new ResponseEntity<>(stock,HttpStatus.OK);
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('stock:write')")
     public ResponseEntity<Stock> addStock(@RequestBody StockRequest stockRequest){
         Stock stock = stockService.addStock(stockRequest);
         return new ResponseEntity<>(stock,HttpStatus.CREATED);
@@ -39,6 +43,7 @@ public class StockController {
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAuthority('stock:edit')")
     public ResponseEntity<Stock> updateStock(@RequestBody StockUpdateRequest stockUpdateRequest){
         Stock stock =stockService.updateStock(stockUpdateRequest);
         return new ResponseEntity<>(stock,HttpStatus.OK);
